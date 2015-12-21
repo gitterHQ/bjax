@@ -30,6 +30,7 @@ describe('node-test-suite', function() {
     });
 
     require('./specs/bjax-client-spec')();
+    require('./specs/bjax-cancellation-spec')();
   });
 
 });

@@ -46,6 +46,10 @@ function createRequest(url, options, method, jsonResponse) {
       }
     } else {
       bodyEncoded = body;
+
+      if (!hasContentTypeHeader) {
+        headers['Content-Type'] = 'text/plain';
+      }
     }
   }
 

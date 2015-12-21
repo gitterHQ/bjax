@@ -34,6 +34,7 @@ describe('browser test suite', function() {
 
     require('./specs/bjax-client-spec')();
     require('./specs/bjax-client-cors-limited-spec')();
+    require('./specs/bjax-cancellation-spec')();
     require('./specs/bjax-network-fail-spec')();
 
   });

@@ -30,6 +30,29 @@ router.use('/ping-cors-limited',
     });
   });
 
+var kvStore = {};
+router.post('/key-value',
+  bodyParser.urlencoded({ type: 'text/plain' }),
+  function(req, res) {
+    var isClosed = false;
+    req.on('close', function() {
+      isClosed = true;
+    });
+
+    setTimeout(function() {
+      if (isClosed) return;
+      res.set('Access-Control-Allow-Origin', '*');
+      kvStore[req.body.key] = req.body.value;
+      res.send('OK');
+    }, 100);
+  });
+
+router.get('/key-value',
+  function(req, res) {
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send(kvStore[req.query.key]);
+  });
+
 router.use('/network-fail',
   function(req) {
     req.socket.end();
