@@ -1,0 +1,37 @@
+{
+  "name": "bjax",
+  "version": "0.1.0",
+  "description": "Bluebird AJAX component",
+  "main": "node.js",
+  "browser": "browser.js",
+  "scripts": {
+    "test": "mocha test/test-suite-node"
+  },
+  "author": "Andrew Newdigate <andrewn@datatribe.net> (http://about.me/andrewnewdigate)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gitterHQ/bjax.git"
+  },
+  "keywords": [
+    "ajax",
+    "bluebird"
+  ],
+  "bugs": {
+    "url": "https://github.com/gitterHQ/bjax/issues"
+  },
+  "homepage": "https://github.com/gitterHQ/bjax#readme",
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "debug": "^2.2.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "internal-ip": "^1.1.0",
+    "mocha": "^2.3.4",
+    "mocha-loader": "^0.7.1",
+    "webpack": "^1.12.9",
+    "webpack-dev-middleware": "^1.4.0"
+  }
+}
