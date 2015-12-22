@@ -55,7 +55,7 @@ function createRequest(url, options, method, jsonResponse) {
 
   // Setup the accepts
   if (jsonResponse && !hasAcceptHeader) {
-    headers['Accept'] = 'application/json';
+    headers.Accept = 'application/json';
   }
 
   if (!hasContentLengthHeader && bodyEncoded) {
@@ -85,6 +85,8 @@ function createRequest(url, options, method, jsonResponse) {
  *    body: body of the message
  *    headers: header to send
  *    responseType: `json`: treat response as JSON
+ *    autoHeaders: true: automatically add some headers
+ *    timeout: request timeout (ms)
  */
 function request(url, options) {
   if (!options) options = {};

@@ -10,6 +10,7 @@ var debug = require('debug')('bjax:test:server');
 var internalIp = require('internal-ip');
 var testRoutes = require('./test-routes');
 var localIp = process.env.BJAX_LOCAL_IP || internalIp.v4();
+var enableDestroy = require('server-destroy');
 
 var server;
 var crossOriginServer;
@@ -20,7 +21,10 @@ var crossOriginPort = port + 1;
 function listen(options, callback) {
   var app = express();
   server = http.createServer(app);
+  enableDestroy(server);
+
   crossOriginServer = http.createServer(app);
+  enableDestroy(crossOriginServer);
 
   var sameOriginUrl = 'http://' + localIp + ':' + port;
   var crossOriginUrl = 'http://' + localIp + ':' + crossOriginPort;
@@ -84,10 +88,10 @@ function listen(options, callback) {
 
 function unlisten(callback) {
   debug('Unlisten');
-  server.close(function() {
-    crossOriginServer.close(function() {
+  server.destroy(function() {
+    crossOriginServer.destroy(function() {
       callback();
-    })
+    });
   });
 }
 

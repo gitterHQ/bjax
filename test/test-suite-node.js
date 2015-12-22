@@ -30,7 +30,11 @@ describe('node-test-suite', function() {
     });
 
     require('./specs/bjax-client-spec')();
+    require('./specs/bjax-client-cors-limited-spec')();
     require('./specs/bjax-cancellation-spec')();
+    require('./specs/bjax-network-fail-spec')();
+    require('./specs/bjax-client-no-autoheaders-spec')();
+
   });
 
 });

@@ -15,6 +15,8 @@ var HttpError = errors.HttpError;
  *    body: body of the message
  *    headers: header to send
  *    responseType: `json`: treat response as JSON
+ *    autoHeaders: true: automatically add some headers
+ *    timeout: request timeout (ms)
  */
 function request(url, options) {
   if (!options) options = {};
@@ -22,6 +24,7 @@ function request(url, options) {
   var promise = new Promise(function(resolve, reject, onCancel) {
     var method = options.method && options.method.toLowerCase() || 'get';
     var jsonResponse = !options.responseType || options.responseType === "json";
+    var autoHeaders = options.autoHeaders !== false;
     var xhr = new WindowXMLHttpRequest();
     var bodyEncoded;
 
@@ -48,7 +51,7 @@ function request(url, options) {
       if (typeof body === 'object') {
         bodyEncoded = JSON.stringify(body);
 
-        if (!hasContentTypeHeader) {
+        if (!hasContentTypeHeader && autoHeaders) {
           xhr.setRequestHeader('Content-Type', 'application/json');
         }
       } else {
@@ -57,7 +60,7 @@ function request(url, options) {
     }
 
     // Setup the accepts
-    if (jsonResponse && !hasAcceptHeader) {
+    if (jsonResponse && !hasAcceptHeader && autoHeaders) {
       xhr.setRequestHeader('Accept', 'application/json');
     }
 

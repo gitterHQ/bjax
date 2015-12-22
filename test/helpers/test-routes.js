@@ -19,7 +19,8 @@ router.use('/ping',
   });
 
 router.use('/ping-cors-limited',
-  bodyParser.text(),
+  bodyParser.text({ type: '*/*' }),
+  bodyParser.raw(),
   function(req, res) {
     res.set('Access-Control-Allow-Origin', '*');
     res.send({
